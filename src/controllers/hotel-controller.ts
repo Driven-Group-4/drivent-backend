@@ -26,3 +26,15 @@ export async function getHotelsWithRooms(req: AuthenticatedRequest, res: Respons
     next(error);
   }
 }
+
+export async function getHotelsWithRoomsInfo(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+  const { userId } = req;
+
+  try {
+    const hotels = await hotelsService.getHotelsWithRoomsInfo(userId);
+
+    return res.status(httpStatus.OK).send(hotels);
+  } catch (error) {
+    next(error);
+  }
+}
