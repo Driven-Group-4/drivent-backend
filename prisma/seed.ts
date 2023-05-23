@@ -71,6 +71,58 @@ async function main() {
       { name: 'W105', capacity: 2, hotelId: hotel3.id},
     ]
   });
+
+  await prisma.activity.deleteMany({});
+  await prisma.location.deleteMany({});
+  const location1 = await prisma.location.create({data: {name: 'Auditório Principal'}});
+  const location2 = await prisma.location.create({data: {name: 'Auditório Lateral'}});
+  const location3 = await prisma.location.create({data: {name: 'Sala de Workshop'}});
+
+  const activity1 = await prisma.activity.create({
+    data: {
+      name: 'Minecraft: montando o PC ideal',
+      startsAt: dayjs().set('hour', 6).set('minute', 0).set('second', 0).toDate(),
+      endsAt: dayjs().set('hour', 7).set('minute', 0).set('second', 0).toDate(),
+      availableSeats: 27,
+      locationId: location1.id,
+    }
+  });
+  const activity2 = await prisma.activity.create({
+    data: {
+      name: 'LoL: montando o PC ideal',
+      startsAt: dayjs().set('hour', 7).set('minute', 0).set('second', 0).toDate(),
+      endsAt: dayjs().set('hour', 8).set('minute', 0).set('second', 0).toDate(),
+      availableSeats: 10,
+      locationId: location1.id,
+    }
+  });
+  const activity3 = await prisma.activity.create({
+    data: {
+      name: 'Palestra x',
+      startsAt: dayjs().set('hour', 6).set('minute', 0).set('second', 0).toDate(),
+      endsAt: dayjs().set('hour', 8).set('minute', 0).set('second', 0).toDate(),
+      availableSeats: 27,
+      locationId: location2.id,
+    }
+  });
+  const activity4 = await prisma.activity.create({
+    data: {
+      name: 'Palestra y',
+      startsAt: dayjs().set('hour', 6).set('minute', 0).set('second', 0).toDate(),
+      endsAt: dayjs().set('hour', 7).set('minute', 0).set('second', 0).toDate(),
+      availableSeats: 12,
+      locationId: location3.id,
+    }
+  });
+  const activity5 = await prisma.activity.create({
+    data: {
+      name: 'Palestra z',
+      startsAt: dayjs().set('hour', 7).set('minute', 0).set('second', 0).toDate(),
+      endsAt: dayjs().set('hour', 8).set('minute', 0).set('second', 0).toDate(),
+      availableSeats: 5,
+      locationId: location3.id,
+    }
+  });
 }
 
 main()
