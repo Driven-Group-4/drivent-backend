@@ -8,6 +8,12 @@ async function create(userId: number, activityId: number, startsAt: string) {
       startsAt,
     },
   });
+  await prisma.activity.update({
+    where: {
+      id: activityId,
+    },
+    data: { availableSeats: { decrement: 1 } },
+  });
 }
 
 async function getUserActivities(userId: number) {
@@ -24,6 +30,12 @@ async function delUserActivity(userId: number, activityId: number) {
       userId,
       activityId,
     },
+  });
+  await prisma.activity.update({
+    where: {
+      id: activityId,
+    },
+    data: { availableSeats: { increment: 1 } },
   });
 }
 
