@@ -32,14 +32,14 @@ model Session {
 }
 
 model Event {
-  id                 Int      @id @default(autoincrement())
-  title              String   @db.VarChar(255)
-  backgroundImageUrl String   @db.VarChar(255)
-  logoImageUrl       String   @db.VarChar(255)
+  id                 Int        @id @default(autoincrement())
+  title              String     @db.VarChar(255)
+  backgroundImageUrl String     @db.VarChar(255)
+  logoImageUrl       String     @db.VarChar(255)
   startsAt           DateTime
   endsAt             DateTime
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  createdAt          DateTime   @default(now())
+  updatedAt          DateTime   @updatedAt
   Location           Location[]
 }
 
@@ -143,7 +143,7 @@ model Booking {
 
 model Location {
   id        Int        @id @default(autoincrement())
-  Event     Event     @relation(fields: [eventId], references: [id])
+  Event     Event      @relation(fields: [eventId], references: [id])
   eventId   Int
   name      String
   createdAt DateTime   @default(now())
@@ -170,6 +170,7 @@ model Schedule {
   Activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
   userId     Int
   activityId Int
+  startsAt   DateTime @default(now())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }

@@ -17,11 +17,11 @@ async function findFirst() {
     include: {
       Location: {
         include: {
-          Activity: true
-        }
-      }
-    }
-  })
+          Activity: true,
+        },
+      },
+    },
+  });
 
   redis.setEx(cacheKey, 3, JSON.stringify(event));
 
