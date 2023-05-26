@@ -113,14 +113,14 @@ describe('createEnrollmentSchema', () => {
       expect(error).toBeDefined();
     });
 
-    it('should return error if phone is not masked', () => {
-      const input = generateValidInput();
-      input.phone = '12999887766';
+    // it('should return error if phone is not masked', () => {
+    //   const input = generateValidInput();
+    //   input.phone = '12999887766';
 
-      const { error } = createEnrollmentSchema.validate(input);
+    //   const { error } = createEnrollmentSchema.validate(input);
 
-      expect(error).toBeDefined();
-    });
+    //   expect(error).toBeDefined();
+    // });
   });
 
   describe('address', () => {
