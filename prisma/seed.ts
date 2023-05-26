@@ -74,9 +74,9 @@ async function main() {
 
   await prisma.activity.deleteMany({});
   await prisma.location.deleteMany({});
-  const location1 = await prisma.location.create({data: {name: 'Auditório Principal'}});
-  const location2 = await prisma.location.create({data: {name: 'Auditório Lateral'}});
-  const location3 = await prisma.location.create({data: {name: 'Sala de Workshop'}});
+  const location1 = await prisma.location.create({data: {name: 'Auditório Principal', eventId: event.id}});
+  const location2 = await prisma.location.create({data: {name: 'Auditório Lateral', eventId: event.id}});
+  const location3 = await prisma.location.create({data: {name: 'Sala de Workshop', eventId: event.id}});
 
   const activity1 = await prisma.activity.create({
     data: {

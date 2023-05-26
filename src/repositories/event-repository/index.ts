@@ -10,7 +10,18 @@ async function findFirst() {
     }
   }
 
-  const event = await prisma.event.findFirst();
+  const findEvent = await prisma.event.findFirst();
+
+  const event = await prisma.event.findFirst({
+    where: { id: findEvent.id },
+    include: {
+      Location: {
+        include: {
+          Activity: true
+        }
+      }
+    }
+  })
 
   redis.setEx(cacheKey, 3, JSON.stringify(event));
 
