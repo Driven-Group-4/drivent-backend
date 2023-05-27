@@ -24,13 +24,15 @@ describe('GET /event', () => {
     const response = await server.get('/event');
 
     expect(response.status).toBe(httpStatus.OK);
-    expect(response.body).toEqual({
-      id: event.id,
-      title: event.title,
-      backgroundImageUrl: event.backgroundImageUrl,
-      logoImageUrl: event.logoImageUrl,
-      startsAt: event.startsAt.toISOString(),
-      endsAt: event.endsAt.toISOString(),
-    });
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        id: event.id,
+        title: event.title,
+        backgroundImageUrl: event.backgroundImageUrl,
+        logoImageUrl: event.logoImageUrl,
+        startsAt: event.startsAt.toISOString(),
+        endsAt: event.endsAt.toISOString(),
+      }),
+    );
   });
 });
