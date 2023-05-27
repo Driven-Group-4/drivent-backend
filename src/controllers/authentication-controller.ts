@@ -13,3 +13,14 @@ export async function singInPost(req: Request, res: Response) {
     return res.status(httpStatus.UNAUTHORIZED).send({});
   }
 }
+
+export async function signInOAuth(req: Request, res: Response) {
+  const { code } = req.body;
+  try {
+    const result = await authenticationService.signInGithub(code);
+    return res.status(httpStatus.OK).send(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(httpStatus.UNAUTHORIZED).send({});
+  }
+}
