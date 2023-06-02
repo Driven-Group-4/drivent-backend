@@ -1,14 +1,14 @@
-import { prisma, redis } from '@/config';
+import { prisma } from '@/config';
 
 async function findFirst() {
-  const cacheKey = 'event';
-  if (process.env.NODE_ENV !== 'test') {
-    const cachedEvent = await redis.get(cacheKey);
-    if (cachedEvent) {
-      const event = JSON.parse(cachedEvent);
-      return event;
-    }
-  }
+  // const cacheKey = 'event';
+  // if (process.env.NODE_ENV !== 'test') {
+  //   const cachedEvent = await redis.get(cacheKey);
+  //   if (cachedEvent) {
+  //     const event = JSON.parse(cachedEvent);
+  //     return event;
+  //   }
+  // }
 
   const findEvent = await prisma.event.findFirst();
 
@@ -23,7 +23,7 @@ async function findFirst() {
     },
   });
 
-  redis.setEx(cacheKey, 3, JSON.stringify(event));
+  // redis.setEx(cacheKey, 3, JSON.stringify(event));
 
   return event;
 }
